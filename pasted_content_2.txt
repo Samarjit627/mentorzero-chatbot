@@ -1,0 +1,151 @@
+Perfect — here is the Full Stack + Prompt Template you can give Manus.im along with the Agent Instruction Script I shared above.
+This will make your ask very concrete and executable.
+
+📚 Full Stack Recommendation
+for YC Video Knowledge Copilot Agent
+
+1️⃣ Data Ingestion
+Tools:
+
+YouTube API → list videos + metadata
+
+yt-dlp → download audio
+
+Whisper (OpenAI Whisper or faster version like faster-whisper) → generate transcripts
+Alternative: AssemblyAI API if you want very fast + accurate transcription.
+
+Storage:
+
+Store per video:
+
+Video ID
+
+Title
+
+URL
+
+Published date
+
+Full transcript
+
+Summary (optional — use GPT to create a 5-line summary per video to speed up retrieval later)
+
+2️⃣ Vector Database
+Recommended Options:
+
+FAISS (if local and free)
+
+Chroma (very simple, lightweight, Python-native)
+
+Pinecone (SaaS, highly scalable — best if you want to grow this agent into multi-source in future)
+
+Weaviate (open source, powerful, if Manus is already using it)
+
+Embedding Model:
+
+OpenAI text-embedding-3-small or text-embedding-3-large
+(very accurate and optimized for chat RAG)
+
+Chunk size: 500–1000 tokens
+Overlap: 100–200 tokens overlap
+
+3️⃣ LLM for Response Generation
+Model to use:
+
+GPT-4o (best current model for reasoning + citations)
+
+Claude 3.5 Sonnet is also excellent if you want fast & cheap.
+
+4️⃣ Auto-Updater Logic
+Every 7 days:
+
+Check Y Combinator YouTube channel:
+
+Use YouTube API to get latest videos since last run (store last checked timestamp).
+
+If new videos found:
+
+Download audio → transcribe → embed chunks → add to vector DB.
+
+Log update with:
+
+Video IDs added
+
+Timestamp
+
+Any errors encountered.
+
+Scheduler:
+
+Simple CRON job or use Manus’s internal task scheduling if supported.
+
+5️⃣ Chat Interface
+Initial MVP:
+
+Web-based chat using Streamlit or Gradio
+OR
+
+Slack bot (easy to integrate with existing workflows)
+OR
+
+VSCode plugin (if you want to query inside your coding workspace)
+
+🎙 Prompt Template for Chat Completion (RAG)
+System Prompt Template (example):
+
+SYSTEM:
+You are YC MentorBot — an expert startup advisor trained on the full content of Y Combinator's YouTube channel, combined with my project context.
+
+Your job is to provide clear, actionable advice based on YC’s teachings, with awareness of my current project needs.
+
+Always ground your answers in YC content. If no relevant YC content exists, say “No YC content found” and optionally provide general advice.
+
+When quoting YC content, cite video title and URL when possible.
+
+Always adjust your advice based on the following Project Context.
+
+Project Context:
+{insert project context here — e.g. Axis5 pitch deck summary, current milestones, challenges}
+
+Relevant YC Video Segments:
+{top K retrieved segments from vector DB — typically 4–6 chunks}
+
+User Question:
+{user’s question}
+
+Expected format of answer:
+
+Direct Answer
+
+Relevant YC insights (with citations if possible)
+
+Tailored advice for current project context
+
+Example run:
+
+User:
+How does YC recommend positioning AI startups to investors?
+
+Expected output:
+
+YC recommends clearly articulating the unique data advantage, execution speed, and why the founding team is uniquely positioned (YC video: “How to Fundraise for an AI Startup” - https://youtube.com/xyz123).
+
+In your case (Axis5 — AI-powered manufacturing copilot), emphasize your proprietary manufacturability memory layer and real-world vendor insights — this builds a moat.
+
+Also prepare to counter the common “just another AI wrapper” objection — see YC’s video on “Avoiding AI startup pitfalls” - https://youtube.com/abc456.
+
+Summary flow again:
+sql
+Copy
+Edit
+YT API + yt-dlp + Whisper → transcripts → chunk → embed → vector DB
+
+Chat → project context + user query → retrieve top K → GPT-4o → response.
+
+Auto-updater → check new videos every 7 days → ingest → update vector DB.
+Final Checklist to Give Manus.im:
+✅ Agent Instruction (previous message)
+✅ Full Stack (this message)
+✅ System Prompt Template (this message)
+✅ Project Context (you will need to provide this — I can help you write a nice Axis5 / Purring Threads / apps context paragraph for it)
+

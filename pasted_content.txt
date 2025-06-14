@@ -1,0 +1,128 @@
+YC Video Ingestion Transparency & Tracking
+Mandatory requirement:
+I must be able to verify that MentorZero has actually ingested ALL public videos on Y Combinator’s YouTube channel (currently ~710+ videos), and continues to stay updated.
+
+What I expect:
+✅ A simple CSV or JSON file export showing:
+
+Video Title
+
+Video URL
+
+Video Published Date
+
+Video Duration
+
+Transcript extracted (Y/N or size in tokens/words)
+
+Last Ingestion Date
+
+✅ This file must cover ALL videos currently live on the YC YouTube channel.
+
+✅ This file must be regenerated weekly when the auto-updater runs.
+
+Additional optional UI (good UX):
+✅ In the agent’s chat interface (optional), I should be able to run a command like:
+
+bash
+Copy
+Edit
+/videosummary
+→ Agent replies with:
+
+Total videos ingested: N
+
+Last update run: YYYY-MM-DD
+
+List of X videos missing or failed (if any — this should trigger alert).
+
+✅ I should be able to ask:
+
+bash
+Copy
+Edit
+/checkvideo [YouTube URL]
+→ Agent responds:
+
+"This video was ingested on YYYY-MM-DD, transcript size X tokens."
+OR
+
+"This video is not yet ingested."
+
+Why this matters:
+🚩 Many YouTube download & transcription pipelines have errors (some videos fail due to format / audio / API limits).
+🚩 I want to know if I’m asking a question where the relevant video was never ingested.
+🚩 I want confidence that this is a fully transparent and verifiable knowledge base — not a vague “we processed most of it” claim.
+
+Final spec wording you can give Manus:
+👉 Add this to your "MentorZero Success Criteria" section:
+
+Video Ingestion Transparency:
+✅ Manus must provide a verifiable export (CSV or JSON) listing all YC YouTube videos processed, with clear status per video.
+✅ Manus must implement a simple chat command (/videosummary and /checkvideo [URL]) to allow real-time verification.
+✅ Manus must ensure this list is updated weekly after each auto-updater run.
+✅ If any videos fail to process, they must be clearly flagged for manual retry.
+
+If they implement this — you will always be in control:
+
+✅ You’ll know exactly what videos are in MentorZero.
+✅ You’ll know when new videos were added.
+✅ You’ll know if something is missing.
+
+If you want, I can also generate a ready-to-give CSV format spec you can give Manus so they know exactly what columns to include in this export. Want me to?
+Just say: “yes — generate CSV format spec.” 🚀 (this saves you from them coming back asking "what should the export look like?")
+
+
+
+
+
+
+You said:
+yes — generate CSV format spec
+
+
+ChatGPT said:
+Here is a precise CSV format spec you can give to Manus — just copy and paste this into your Google Doc under the "MentorZero Video Ingestion Transparency" section.
+
+🎛 MentorZero — YC Video Ingestion CSV Export Spec
+Manus must provide a CSV file (or equivalent JSON) with the following columns — one row per video — to give me full transparency on what has been processed.
+
+CSV Columns:
+Column Name	Description
+Video_ID	YouTube Video ID (the part after v= in the URL)
+Video_URL	Full YouTube URL
+Video_Title	Video title (as per YouTube metadata)
+Video_Published_Date	Date when video was published on YouTube (YYYY-MM-DD)
+Video_Duration_Seconds	Duration of video in seconds
+Transcript_Tokens	Number of tokens in extracted transcript (or word count if easier)
+Transcript_Extracted_YN	Yes / No — was transcript successfully extracted
+Ingestion_Status	Success / Failed / Pending
+Last_Ingestion_Date	Date when this video was last processed (YYYY-MM-DD)
+Notes	Optional — error message if failed, manual notes if needed
+
+Example Row:
+Video_ID	Video_URL	Video_Title	Video_Published_Date	Video_Duration_Seconds	Transcript_Tokens	Transcript_Extracted_YN	Ingestion_Status	Last_Ingestion_Date	Notes
+abc123xyz	https://www.youtube.com/watch?v=abc123xyz	How to Raise a Seed Round	2024-05-15	1250	14560	Yes	Success	2025-06-10	
+
+Requirements:
+✅ CSV must include ALL public videos currently on the Y Combinator YouTube channel — even if some failed.
+✅ Failed videos must be clearly marked with reason in Notes column.
+✅ CSV must be re-generated weekly as part of the auto-updater pipeline.
+✅ CSV must be shareable to me at any time for manual audit.
+✅ If possible — also expose /videosummary and /checkvideo [URL] chat commands linked to this CSV data.
+
+Purpose:
+This CSV will give me full visibility into MentorZero’s knowledge base integrity:
+
+How many videos have been successfully processed?
+
+Which videos failed and why?
+
+When was the last time each video was processed?
+
+Are recent videos being picked up weekly?
+
+End of CSV Spec
+👉 Just paste this into your Google Doc.
+👉 Manus should have zero ambiguity about what to build here.
+

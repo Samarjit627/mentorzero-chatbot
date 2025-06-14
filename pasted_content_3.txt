@@ -1,0 +1,115 @@
+YC Copilot Agent — Vision & Goals
+Vision & Goals:
+
+I want to build a personal YC Knowledge Copilot Agent that can act as a continuous founder mentor for me.
+
+Y Combinator has published hundreds of videos with timeless and highly practical advice on fundraising, product-market fit, growth, community building, company building, and more. However, this knowledge is fragmented across ~710+ YouTube videos, difficult to search deeply, and not personalized to my startup context.
+
+My goal is to build an agent that:
+
+✅ Ingests and continuously updates YC video content
+✅ Allows me to ask specific founder questions in natural language
+✅ Provides answers grounded in actual YC content (citing source videos when possible)
+✅ Tailors the advice to my current project contexts and stage
+
+Over time, I want this agent to become a personalized mentor that helps me think better, make faster decisions, and stay aligned with proven founder principles — while being tuned to my real-world projects.
+
+My Current Projects (Project Context for Agent)
+1️⃣ Axis5 — AI-Powered Manufacturing Copilot (Primary Project)
+Axis5 is an AI-driven manufacturing copilot for engineers, designers, procurement teams, and early-stage startups.
+
+Problem:
+Today, designers and engineers create CAD files, but understanding how to manufacture those designs at scale is fragmented and painful. DFM (Design for Manufacturability) checks are siloed, material-process decisions are hard, and manufacturing cost estimation is often trial-and-error.
+
+Vision:
+Axis5 aims to build the Manufacturing Feedback OS — an intelligent layer that sits after CAD creation and before manufacturing — helping users answer:
+
+How manufacturable is my part?
+
+What risks exist in my design?
+
+What material and process should I use?
+
+How can I reduce cost or improve quality?
+
+Which vendors are best suited for this part?
+
+Key Features Being Built:
+
+Tolerance Intelligence Engine
+
+Assembly Impact Checker
+
+Manufacturability Confidence Score (0–100)
+
+Process-specific DFM logic (CNC, molding, sheet metal, 3D printing, casting, etc.)
+
+Cost Optimizer and Tooling Estimator
+
+Factory Context Layer and Manufacturing Signal Forecast Layer
+
+Audience:
+
+MSMEs, startups, R&D labs, large enterprise design & engineering teams.
+
+Why YC Copilot Matters for Axis5:
+
+I need YC advice on how to build a deep-tech SaaS startup.
+
+How to pitch and position AI-first B2B tools.
+
+How to create defensibility in an AI-heavy tool.
+
+How to navigate product-market fit and early GTM for an engineering-focused product.
+
+2️⃣ Purring Threads — Cat-Themed Jewelry Brand (Side Project)
+Purring Threads is a handcrafted embroidered jewelry and accessories brand based in Bangalore, India — co-founded with my wife.
+
+Background:
+The brand started in 2023 and achieved:
+
+20+ exhibitions (including Pili Taxi, Hundred Hands)
+
+100+ SKUs
+
+10K+ products sold
+
+24K+ customers
+
+Operations paused after August 2024 due to personal reasons (new baby). Now planning a strong comeback in 2025.
+
+Relaunch Focus:
+
+Launching a new “Cat Brooch” collection inspired by our 5 rescued cats: Drackie, Piku, Noori, Meenu, Coco.
+
+Building an influencer and content-first marketing strategy (Instagram + YouTube).
+
+Adding workshop-based revenue stream (DIY kits + pre-recorded content).
+
+Targeting the growing community of cat lovers + pet parents + jewelry enthusiasts.
+
+Why YC Copilot Matters for Purring Threads:
+
+I want YC advice on building niche consumer brands.
+
+How to create early community and repeat customers.
+
+How to balance content + commerce.
+
+How to think about scaling craft-based businesses without losing authenticity.
+
+Final Notes
+I am a multi-project founder.
+
+I move between deep-tech B2B SaaS (Axis5) and niche D2C brand (Purring Threads).
+
+The agent should always be aware of this context and tune answers accordingly.
+
+Example tuning:
+
+For Axis5 questions → give advice suitable for B2B SaaS, AI-first products, deep-tech selling.
+
+For Purring Threads questions → give advice suitable for D2C, community-first brands, content-driven marketing.
+
+Summary
+👉 The YC Copilot Agent is intended to become my personal thinking partner, infused with the best of YC’s startup wisdom — but always aware of my projects and current goals.

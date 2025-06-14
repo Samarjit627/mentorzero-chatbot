@@ -1,0 +1,333 @@
+/* --- ChatGPT/WhatsApp-style Modern Chat UI --- */
+body {
+    background: #fff;
+    font-family: system-ui, 'Segoe UI', Arial, sans-serif;
+    font-size: 1.12rem;
+    color: #23272f;
+}
+
+/* Chat window background */
+.mz-chat-window {
+    background: #fbfbfc;
+    border-radius: 18px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+    padding: 32px 24px 24px 24px;
+    max-width: 600px;
+    margin: 0 auto 32px auto;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.mz-bubble-wrap {
+    display: block;
+    width: 100%;
+    gap: 0.5em;
+}
+
+/* Bot message bubble (left, white) */
+.mz-bot {
+    align-self: flex-start;
+    margin-left: 0;
+    margin-right: auto;
+    background: none;
+    display: block;
+    width: 100%;
+}
+.mz-bot-label {
+    color: #6b6b6b;
+    font-size: 0.97rem;
+    font-weight: 500;
+    margin-left: 8px;
+    margin-bottom: 2px;
+}
+.mz-bot .mz-msg {
+    background: #f4f6fb;
+    color: #23272f;
+    border-radius: 24px 24px 24px 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 14px 20px;
+    font-weight: 500;
+    max-width: 600px;
+    min-width: 120px;
+    width: auto;
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    font-size: 1.09rem;
+    word-break: break-word;
+}
+
+
+/* User message bubble (right, blue) */
+.mz-user {
+    align-self: flex-end;
+    margin-left: auto;
+    margin-right: 0;
+    background: none;
+    flex-direction: column;
+    width: fit-content;
+}
+.mz-user-label {
+    color: #6b6b6b;
+    font-size: 0.97rem;
+    font-weight: 500;
+    text-align: right;
+    margin-right: 8px;
+    margin-bottom: 2px;
+}
+.mz-user .mz-msg {
+    background: #0057FF;
+    color: #fff;
+    border-radius: 24px 24px 8px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    padding: 14px 20px;
+    font-weight: 500;
+    max-width: 600px;
+    min-width: 120px;
+    width: auto;
+    display: inline-block;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    font-size: 1.09rem;
+    word-break: break-word;
+}
+
+
+/* Input bar */
+.stTextInput>div>div>input {
+    padding: 14px 18px;
+    border-radius: 24px;
+    border: 1.5px solid #e0e0e0;
+    font-size: 1.09rem;
+    background: #fff;
+    color: #222;
+    font-family: system-ui, 'Segoe UI', Arial, sans-serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+.stTextInput>div>div>input::placeholder {
+    color: #b0b0b0;
+    opacity: 1;
+}
+.stButton>button {
+    background: #0057FF;
+    color: #fff;
+    border-radius: 24px;
+    padding: 10px 28px;
+    font-size: 1.09rem;
+    border: none;
+    margin-left: 12px;
+    font-weight: 600;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+.stButton>button:hover {
+    background: #003eaa;
+}
+
+@media (max-width: 600px) {
+    .mz-chat-window {
+        max-width: 99vw;
+        padding: 12px 2vw 12px 2vw;
+    }
+    .mz-bot .mz-msg, .mz-user .mz-msg {
+        max-width: 94vw;
+        min-width: 60vw;
+        font-size: 1rem;
+    }
+}
+
+body {
+    background: #23272f;
+    color: #ececf1;
+    font-family: 'Inter', 'Segoe UI', Arial, system-ui, sans-serif;
+    font-size: 1.13rem;
+    letter-spacing: 0.01em;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: #202123;
+    color: #ececf1;
+    border-right: 1px solid #262626;
+}
+section[data-testid="stSidebar"] .block-container {
+    padding-top: 24px;
+}
+section[data-testid="stSidebar"] button {
+    background: #262626;
+    color: #ececf1;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    border: none;
+    font-size: 1rem;
+    transition: background 0.2s;
+}
+section[data-testid="stSidebar"] button:hover {
+    background: #343541;
+}
+
+/* Main header */
+.mz-header {
+    text-align: center;
+    margin-top: 32px;
+    margin-bottom: 18px;
+    color: #ececf1;
+    opacity: 0.98;
+}
+.mz-header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.2em;
+    letter-spacing: 0.01em;
+}
+.mz-header p {
+    color: #b0b0b0;
+    font-size: 1.11rem;
+    margin-top: 0;
+    font-weight: 400;
+}
+
+/* Chat window */
+.mz-chat-window {
+    background: #23272f;
+    border-radius: 18px;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.18);
+    padding: 32px 24px 24px 24px;
+    max-width: 700px;
+    margin: 0 auto 32px auto;
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Message bubbles */
+/* --- WhatsApp-style Chat Bubbles --- */
+.mz-bubble-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.mz-bubble {
+    display: block;
+    margin-bottom: 14px;
+    width: 100%;
+    font-family: system-ui, 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+/* User (right, green bubble) */
+.mz-user {
+    align-self: flex-end;
+    margin-left: auto;
+    margin-right: 0;
+    background: none;
+    display: block;
+    width: 100%;
+}
+.mz-user .mz-msg {
+    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    color: #fff;
+    border-radius: 16px 4px 16px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    padding: 12px 18px;
+    font-weight: 500;
+    max-width: 65vw;
+    margin-left: 6px;
+    margin-right: 0;
+    text-align: left;
+    font-size: 1.08rem;
+}
+/* Bot (left, gray bubble) */
+.mz-bot {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-self: flex-start;
+    margin-right: auto;
+    margin-left: 0;
+    background: none;
+}
+.mz-bot .mz-msg {
+    background: #222b2e;
+    color: #fff;
+    border-radius: 4px 16px 16px 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+    padding: 12px 18px;
+    font-weight: 400;
+    max-width: 65vw;
+    margin-right: 0;
+    margin-left: 8px;
+    text-align: left;
+    font-size: 1.08rem;
+}
+.mz-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #23232b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 2px;
+}
+@media (max-width: 800px) {
+    .mz-bubble .mz-msg {
+        max-width: 90vw;
+        font-size: 1rem;
+    }
+    .mz-avatar {
+        width: 26px;
+        height: 26px;
+        font-size: 0.92rem;
+    }
+}
+/* --- End WhatsApp-style Chat Bubbles --- */
+
+/* Input bar */
+.stTextInput>div>div>input {
+    padding: 16px 22px;
+    border-radius: 28px;
+    border: 1.5px solid #343541;
+    font-size: 1.14rem;
+    background: #23272f;
+    color: #ececf1;
+    font-family: 'Inter', 'Segoe UI', Arial, system-ui, sans-serif;
+}
+.stTextInput>div>div>input::placeholder {
+    color: #b0b0b0;
+    opacity: 1;
+}
+.stButton>button {
+    background: linear-gradient(135deg, #00c6fb 0%, #005bea 100%);
+    color: #fff;
+    border-radius: 24px;
+    padding: 10px 28px;
+    font-size: 1.13rem;
+    border: none;
+    margin-left: 12px;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+.stButton>button:hover {
+    background: linear-gradient(135deg, #005bea 0%, #00c6fb 100%);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+    .mz-chat-window {
+        max-width: 98vw;
+        padding: 12px 2vw 12px 2vw;
+    }
+    .mz-bubble {
+        max-width: 96vw;
+    }
+    #mentorzero-header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* --- End ChatGPT/WhatsApp-style Modern Chat UI --- */

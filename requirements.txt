@@ -1,0 +1,12 @@
+streamlit==1.35.0
+faiss-cpu==1.7.4
+sentence-transformers==2.7.0
+numpy==1.26.4
+google-api-python-client==2.126.0
+youtube-transcript-api==0.6.2
+beautifulsoup4
+requests
+yt-dlp
+openai
+requests==2.32.3
+yt-dlp==2024.4.9
