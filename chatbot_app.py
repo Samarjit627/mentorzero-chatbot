@@ -71,6 +71,8 @@ Your answer must:
 if 'conversations' not in st.session_state:
     st.session_state['conversations'] = {}
     load_chats()
+if 'project_context' not in st.session_state:
+    st.session_state['project_context'] = "Axis5 is an AI-powered manufacturing co-pilot. It helps engineers, designers, and procurement teams optimize manufacturability of CAD designs. Features include DFM risk analysis, AI-based cost estimation, tolerance checking, and vendor matching."
 if 'current_chat_id' not in st.session_state or st.session_state['current_chat_id'] not in st.session_state['conversations']:
     chat_id = str(uuid.uuid4())
     st.session_state['current_chat_id'] = chat_id
@@ -112,6 +114,20 @@ if st.sidebar.button('New Chat'):
 
 # Optional: Project context in sidebar
 with st.sidebar.expander('Project Context', expanded=False):
+    pass
+
+# --- Automated YC Data Refresh ---
+if st.sidebar.button('Refresh YC Data'):
+    import subprocess
+    with st.spinner('Updating YC data...'):
+        result = subprocess.run(['bash', 'update_yc_data.sh'], capture_output=True, text=True)
+        if result.returncode == 0:
+            st.sidebar.success('YC data updated successfully!')
+        else:
+            st.sidebar.error('Failed to update YC data. See logs.')
+        st.sidebar.write(result.stdout)
+        st.sidebar.write(result.stderr)
+
     if 'project_context' not in st.session_state:
         st.session_state['project_context'] = "Axis5 is an AI-powered manufacturing co-pilot. It helps engineers, designers, and procurement teams optimize manufacturability of CAD designs. Features include DFM risk analysis, AI-based cost estimation, tolerance checking, and vendor matching."
     st.session_state['project_context'] = st.text_area(
@@ -243,8 +259,12 @@ def submit_message():
                     relevant_segments_text = ""
                     for i, chunk in enumerate(relevant_chunks):
                         content = chunk.get('content', None)
+                        url = chunk.get('url', None)
                         if content is not None:
-                            relevant_segments_text += f"\n\nSegment {i+1}: {content}"
+                            if url:
+                                relevant_segments_text += f"\n\nSegment {i+1}: {content}\n[Source]({url})"
+                            else:
+                                relevant_segments_text += f"\n\nSegment {i+1}: {content}"
                 else:
                     relevant_segments_text = "No direct YC content found for this specific query."
                 try:
@@ -318,8 +338,12 @@ if submitted:
                     relevant_segments_text = ""
                     for i, chunk in enumerate(relevant_chunks):
                         content = chunk.get('content', None)
+                        url = chunk.get('url', None)
                         if content is not None:
-                            relevant_segments_text += f"\n\nSegment {i+1}: {content}"
+                            if url:
+                                relevant_segments_text += f"\n\nSegment {i+1}: {content}\n[Source]({url})"
+                            else:
+                                relevant_segments_text += f"\n\nSegment {i+1}: {content}"
                 else:
                     relevant_segments_text = "No direct YC content found for this specific query."
                 try:

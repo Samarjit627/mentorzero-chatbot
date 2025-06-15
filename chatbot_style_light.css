@@ -50,18 +50,29 @@ section.main, .block-container, .stApp, .css-1wrcr25, .css-18e3th9 {
     margin-left: 8px;
     margin-bottom: 2px;
 }
-.mz-bot .mz-msg {
+.mz-bot .mz-msg, .mz-user .mz-msg {
     background: #34c759;
     color: #fff;
     border-radius: 24px 24px 24px 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 14px 20px;
+    padding: 16px 24px 20px 24px;
     font-weight: 500;
-    max-width: 320px;
     margin-left: 0;
     margin-right: 0;
     text-align: left;
     font-size: 1.09rem;
+    line-height: 1.6;
+    overflow: visible;
+    word-break: break-word;
+    box-sizing: border-box;
+    width: fit-content;
+    max-width: 100%;
+    display: block;
+}
+
+.mz-user .mz-msg {
+    background: #2563eb;
+    text-align: right;
 }
 
 .mz-user {
@@ -85,13 +96,17 @@ section.main, .block-container, .stApp, .css-1wrcr25, .css-18e3th9 {
     color: #fff;
     border-radius: 24px 24px 8px 24px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    padding: 14px 20px;
+    padding: 14px 20px 18px 20px;
     font-weight: 500;
-    max-width: 320px;
+    max-width: 90vw;
     margin-left: auto;
     margin-right: 0;
     text-align: right;
     font-size: 1.09rem;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    min-height: 2.5em;
 }
 
 .stTextInput>div>div>input {
