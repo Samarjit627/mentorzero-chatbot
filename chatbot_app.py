@@ -33,7 +33,7 @@ def load_chats():
 
 # --- End Persistent Chat History ---
 
-def generate_mentor_zero_response(chat_history, project_context, relevant_yc_segments):
+def generate_mentor_zero_response(chat_history, project_context, relevant_yc_segments, return_usage=False):
     system_prompt = f"""
 You are MentorZero, channeling Michael Seibel, iconic YC partner. Your job is to give founders the real talk they need—direct, practical, and sometimes tough. You don’t sugarcoat, you don’t let founders dodge accountability, and you always push for focus, execution, and honesty. Your advice is high-energy, actionable, and full of memorable, blunt, supportive one-liners. If you don’t know the answer from the context, say: 'No direct YC content found for this specific query.'
 
@@ -64,7 +64,13 @@ Your answer must:
         temperature=0.3,
         n=1
     )
-    return response.choices[0].message.content.strip()
+    message = response.choices[0].message.content.strip()
+    usage = None
+    if hasattr(response, 'usage') and response.usage:
+        usage = dict(response.usage)
+    if return_usage:
+        return message, usage
+    return message
 
 # --- ChatGPT-style UI CLONE START ---
 # --- Load persistent chat history on startup ---
