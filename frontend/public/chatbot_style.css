@@ -1,9 +1,9 @@
 /* --- ChatGPT/WhatsApp-style Modern Chat UI --- */
 body {
-    background: #fff;
+    background: #181c23;
     font-family: system-ui, 'Segoe UI', Arial, sans-serif;
     font-size: 1.12rem;
-    color: #23272f;
+    color: #f4f6fb;
 }
 
 /* Chat window background */

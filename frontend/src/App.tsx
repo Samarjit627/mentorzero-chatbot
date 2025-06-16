@@ -1,7 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { InitialView } from './components/InitialView';
 import { ChatView } from './components/ChatView';
+import { Sun, Moon } from 'lucide-react'; // Add icons for toggle
+
+// Helper to swap CSS files
+function setThemeCss(theme: 'light' | 'dark') {
+  const darkHref = '/chatbot_style.css';
+  const lightHref = '/chatbot_style_light.css';
+  let link = document.getElementById('theme-style') as HTMLLinkElement | null;
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.id = 'theme-style';
+    document.head.appendChild(link);
+  }
+  link.href = theme === 'dark' ? darkHref : lightHref;
+}
+
 export type Message = {
   id: string;
   content: string;
@@ -17,6 +33,18 @@ export type Message = {
 export type ChatHistoryItem = { id: string; messages: Message[]; savedAt: Date };
 export type Project = { id: string; name: string };
 export function App() {
+  // Theme state
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    return (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
+  });
+
+  useEffect(() => {
+    setThemeCss(theme);
+    document.body.classList.remove('theme-dark', 'theme-light');
+    document.body.classList.add(`theme-${theme}`);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [projects, setProjects] = useState<Project[]>([]);
@@ -105,7 +133,7 @@ export function App() {
   };
 
   return (
-    <div className="flex w-full h-screen bg-[#2b2b2b] text-[#e0e0e0]">
+    <div className={`flex w-full h-screen theme-${theme}`}>
       <Sidebar
         projects={projects}
         onAddProject={handleAddProject}
@@ -114,6 +142,29 @@ export function App() {
         onNewChat={handleNewChat}
       />
       <main className="flex-grow flex flex-col h-screen overflow-hidden">
+        {/* Top bar for theme toggle and Save Chat */}
+        <div className="flex justify-end items-center gap-2 px-6 pt-4">
+          {messages.length > 0 && !chatHistory.some(h => h.messages.length === messages.length && h.messages.every((m, i) => m.content === messages[i].content && m.role === messages[i].role)) && (
+            <button
+              className="bg-[#4a90e2] hover:bg-[#3a7bc2] text-white text-xs px-4 py-1 rounded transition-colors"
+              onClick={handleSaveChat}
+            >
+              Save Chat
+            </button>
+          )}
+          <button
+            aria-label="Toggle theme"
+            className="ml-2 rounded-full p-2 shadow hover:scale-105 transition"
+            onClick={() => {
+              const newTheme = theme === 'dark' ? 'light' : 'dark';
+              console.log('Theme toggle clicked. Setting theme to', newTheme);
+              setTheme(newTheme);
+            }}
+            style={{ border: '1px solid #ccc' }}
+          >
+            {theme === 'dark' ? <Sun size={20} color="#222" /> : <Moon size={20} color="#4a90e2" />}
+          </button>
+        </div>
         {messages.length === 0 ? (
           <InitialView onSendMessage={handleSendMessage} />
         ) : (
@@ -121,10 +172,11 @@ export function App() {
             messages={messages}
             isLoading={isLoading}
             onSendMessage={handleSendMessage}
-            onSaveChat={messages.length > 0 && !chatHistory.some(h => h.messages.length === messages.length && h.messages.every((m, i) => m.content === messages[i].content && m.role === messages[i].role)) ? handleSaveChat : undefined}
+            // Remove Save Chat from ChatView, now handled in top bar
           />
         )}
       </main>
     </div>
   );
 }
+
